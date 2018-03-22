@@ -28,7 +28,7 @@ def save_news_to_db(json_data):
     for i in range(0, json_data["articlesCount"]):
 
         try:
-            new_obj = New.objects.get(slug=json_data["articles"][i]["slug"])
+            new = New.objects.get(slug=json_data["articles"][i]["slug"])
 
         except New.DoesNotExist:
             new = New()
