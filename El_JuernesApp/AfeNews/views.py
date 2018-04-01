@@ -115,3 +115,25 @@ class full_new_and_assignations(generic.DetailView):
             template = 'home.html'
 
         return template
+
+
+class new_copywriter(generic.DetailView):
+    model = New
+    context_object_name = 'new_copywriter'
+
+    def get_context_data(self, **kwargs):
+        context = super(new_copywriter, self).get_context_data(**kwargs)
+        context['new'] = New.objects.get(slug=self.kwargs['slug'])
+        return context
+
+    def get_template_names(self):
+        template = 'home.html'
+        try:
+            user = User.objects.get(username=self.request.user.username)
+            rol = user.user_profile.role
+            if rol == "Copywriter":
+                template = 'AfeNews/New_Copywriter.html'
+        except:
+            template = 'home.html'
+
+        return template
