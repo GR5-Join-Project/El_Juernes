@@ -2,13 +2,12 @@ import codecs
 import json
 from urllib.request import urlopen
 
-from django.contrib.auth.models import User
-from django.shortcuts import HttpResponse
-from django.shortcuts import render
-from django.views import generic
-
 from Accounts.models import User_profile
 from AfeNews.models import New, Author
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.views import generic
 
 
 def Afe_News_List(request):
@@ -22,7 +21,8 @@ def Afe_News_List(request):
         new_obj.assigned = user.username
         new_obj.priority = prioritat
         new_obj.save()
-        return HttpResponse("SLUG NOTICIA: "+ name[0] + " " + "NOM REDACTOR: " + str(writer) + " Prioritat: " + str(prioritat))
+        template = 'http://127.0.0.1:8000/AFE/new/' + name[0]
+        return redirect(template)
     else:
         template = 'home.html'
         json_data = None
@@ -37,6 +37,22 @@ def Afe_News_List(request):
 
         return render(request, template, json_data)
 
+
+def News_assigned(request):
+    template = 'home.html'
+    context = None
+    try:
+        user = User.objects.get(username=request.user.username)
+        rol = user.user_profile.role
+        if rol == "Copywriter":
+            template = 'AfeNews/AssignedNewsList.html'
+        context = {
+            "articles": New.objects.filter(assigned=request.user.username)
+        }
+    except:
+        template = 'home.html'
+
+    return render(request, template, context)
 
 
 def get_json_AFE_news():
@@ -95,6 +111,28 @@ class full_new_and_assignations(generic.DetailView):
             rol = user.user_profile.role
             if rol == "Head_copywriter":
                 template = 'AfeNews/New.html'
+        except:
+            template = 'home.html'
+
+        return template
+
+
+class new_copywriter(generic.DetailView):
+    model = New
+    context_object_name = 'new_copywriter'
+
+    def get_context_data(self, **kwargs):
+        context = super(new_copywriter, self).get_context_data(**kwargs)
+        context['new'] = New.objects.get(slug=self.kwargs['slug'])
+        return context
+
+    def get_template_names(self):
+        template = 'home.html'
+        try:
+            user = User.objects.get(username=self.request.user.username)
+            rol = user.user_profile.role
+            if rol == "Copywriter":
+                template = 'AfeNews/New_Copywriter.html'
         except:
             template = 'home.html'
 

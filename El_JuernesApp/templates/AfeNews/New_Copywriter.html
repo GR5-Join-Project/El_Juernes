@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ new.title }}</title>
+</head>
+<body>
+{% block content %}
+    <p>
+    <h4>Prioritat: {{ new.priority }}</h4>
+    <h1>{{ new.title }}</h1>
+    <h4>{{ new.description }}</h4><br/>
+    {{ new.body }}
+    </p>
+{% endblock %}
+</body>
+</html>
