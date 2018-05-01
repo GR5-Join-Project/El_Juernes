@@ -15,30 +15,13 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Afe News List</h1>
+    <h2>La imatge s'ha pujat correctament</h2>
 
-    {% if articles %}
-        <ul>
-
-            {% for article in articles %}
-                <h4><a href="/AFE/new/{{ article.slug }}">{{ article.title }}</a></h4>
-                <ul>
-                    {{ article.description }}
-                </ul>
-
-
-
-            {% endfor %}
-
-        </ul>
-
-    {% else %}
-        <p>No hi ha noves notícies.</p>
-    {% endif %}
-
+    <input class="button" type="button" value="Tornar al banc d'imatges"
+           onclick="location.href='{% url 'gr_image_bank' %}'"/>
 {% endblock %}
 
 {% block sidebar %}
-    <li><a href="{% url 'AFE' %}">Noves notícies</a></li>
-    <li><a href="{% url 'Articles' %}">Article a revisar</a></li>
+    <li><a href="{% url 'gr_assigned_news' %}">Notícies assignades</a></li>
+    <li><a href="{% url 'gr_image_bank' %}">Banc d'imatges</a></li>
 {% endblock %}
