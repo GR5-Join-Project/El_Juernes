@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ new.title }}</title>
+</head>
+<br>
+{% block content %}
+    <p>
+    <h4>Prioritat: {{ new.priority }}</h4>
+    <h1>{{ new.title }}</h1>
+    <h4>{{ new.description }}</h4><br/>
+    {{ new.body }}
+    </p>
+
+
+    <h3>Descargar l'article:</h3>
+
+    <button type="button">Escollir imatges</button> Imatges asociades | </p>
+
+
+    <h4>Introdueix els comentaris pel redactor:</h4>
+    <form action="/RedactorCap/Comentat/" method="post" enctype="multipart/form-data">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="slug" value="{{ new.slug }}"/>
+        <button type="submit">Enviar comentaris al redactor</button>
+    </form>
+
+
+    <form action="/RedactorCap/Acceptat/" method="post"> {% csrf_token %}
+        <input type="hidden" name="slug" value={{ new.slug }}/>
+        <input type="submit" value="Acceptar">
+    </form>
+
+    <button type="button">Denegar</button>
+
+    <a href="/AFE/new/{{ new.slug }}">
+        <button type="button">Reassignar</button>
+    </a>
+
+
+
+
+
+
+{% endblock %}
+</html>
