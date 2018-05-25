@@ -37,7 +37,7 @@
     <hr/>
     <h1>{{ new.title }}</h1>
     <h4>{{ new.description }}</h4><br/>
-    {{ new.body }}
+    <p style="text-align: justify"> {{ new.body }}</p>
     </p>
 
 
@@ -71,7 +71,7 @@
                 <div style="display: inline-table;">
                     {% csrf_token %}
                     <a href="{{ img.image.url }} ">
-                        <img src="{{ img.image.url }}" width="200" height="200"/>
+                        <img src="{{ img.image.url }}" height="200"/>
                     </a>
 
                     <br>

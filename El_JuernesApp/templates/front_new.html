@@ -29,33 +29,33 @@
 
         {% if user.is_authenticated %}
 
-                <p>{{ firstparagraph }}</p>
+                <p style="text-align: justify">{{ firstparagraph }}</p>
 
                 {% if image1 %}
                 <div>
-                        <img src="{{ image1.image.url }}" width="200" height="200"/>
+                        <img src="{{ image1.image.url }}" height="200"/>
 
                 </div>
                 {% endif %}
 
                 {% if secondparagraph %}
-                    <p>{{ secondparagraph }}</p>
+                    <p style="text-align: justify">{{ secondparagraph }}</p>
                 {% endif %}
 
                 {% if image2 %}
                 <div>
-                    <img src="{{ image2.image.url }}" width="200" height="200"/>
+                    <img src="{{ image2.image.url }}" height="200"/>
 
                 </div>
                 {% endif %}
 
                 {% if thirdparagraph %}
-                    <p>{{ thirdparagraph }}</p>
+                    <p style="text-align: justify">{{ thirdparagraph }}</p>
                 {% endif %}
         {% else %}
 
-            {{ firstparagraph1 }}
-            <h2>Per a llegir la resta de l'article autentifica't o crea una nova subscripció...</h2>
+            <p style="text-align: justify">{{ firstparagraph1 }}</p>
+            <h3 style="color: #005cbf">Per a llegir la resta de l'article autentifica't o crea una nova subscripció...</h3>
 
         {% endif %}
 
