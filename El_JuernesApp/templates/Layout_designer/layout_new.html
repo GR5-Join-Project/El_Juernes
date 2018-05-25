@@ -24,7 +24,7 @@
 {% block breadcrumb %}
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="{% url 'account-redirect' %}">El meu espai de treball</a>
+            <a href="{% url 'ld_assigned_news' %}">Articles a maquetar</a> / <a href="#">Article</a>
         </li>
     </ol>
 {% endblock %}
@@ -33,7 +33,7 @@
     <h4>Prioritat: {{ new.priority }}</h4><hr/>
     <h2>Teletip AFE: {{ new.title }}</h2>
     <h4>{{ new.description }}</h4>
-    <h4>{{ new.body }}</h4><hr/>
+    <p style="text-align: justify"> {{ new.body }}</p><hr/>
 
 
         <h2>Descarrega l'article a maquetar:</h2>
